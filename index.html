@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para Chantal · 6 meses</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <canvas id="fireflies"></canvas>
+  <div class="vignette"></div>
+
+  <!-- Control de música discreto -->
+  <div class="music-control" id="musicControl">
+    <button id="btnPlayPause" aria-label="Pausar o reanudar música" title="Pausar / reanudar">
+      <svg id="iconPause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      <svg id="iconPlay" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <button id="btnMute" aria-label="Silenciar" title="Silenciar">
+      <svg id="iconVolOn" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16 8a5 5 0 010 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+      <svg id="iconVolOff" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M3 10v4h4l5 5V5L7 10H3z"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="1.6"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" aria-label="Volumen">
+    <span class="music-note">Isn't She Lovely</span>
+  </div>
+
+  <!-- Indicador de progreso -->
+  <div class="progress" id="progressDots"></div>
+
+  <audio id="bgMusic" src="assets/audio/isnt-she-lovely.mp3" preload="auto" loop></audio>
+
+  <main id="app">
+
+    <!-- 1. BIENVENIDA -->
+    <section class="scene scene-welcome active" data-scene="welcome">
+      <div class="scene-inner">
+        <span class="eyebrow" id="welcomeEyebrow"></span>
+        <h1 class="headline-xl" id="welcomeTitle"></h1>
+        <div class="hairline"></div>
+        <button class="btn btn-primary" id="btnStart"></button>
+      </div>
+    </section>
+
+    <!-- 2. NOMBRES -->
+    <section class="scene scene-names" data-scene="names">
+      <div class="scene-inner">
+        <span class="eyebrow" id="namesIntro"></span>
+        <div class="form-stack">
+          <div class="field">
+            <label id="herLabel" for="herName"></label>
+            <input type="text" id="herName" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label id="myLabel" for="myName"></label>
+            <input type="text" id="myName" autocomplete="off" />
+          </div>
+          <button class="btn btn-primary" id="btnNamesContinue" disabled></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FECHA -->
+    <section class="scene scene-date" data-scene="date">
+      <div class="scene-inner">
+        <span class="eyebrow" id="dateStepLabel">Un momento para recordar</span>
+        <p class="lede" id="datePrompt"></p>
+        <div class="form-stack">
+          <div class="field">
+            <input type="date" id="dateInput" />
+          </div>
+          <button class="btn btn-primary" id="btnDateSave" disabled></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3b. REVELACIÓN DE FECHA -->
+    <section class="scene scene-date-reveal" data-scene="dateReveal">
+      <div class="scene-inner">
+        <p class="date-reveal" id="dateRevealText"></p>
+        <p class="lede" id="dateRevealCaption"></p>
+        <div class="hairline"></div>
+        <button class="btn" id="btnDateRevealContinue">Continuar →</button>
+      </div>
+    </section>
+
+    <!-- 4. INTRODUCCIÓN EMOCIONAL -->
+    <section class="scene scene-intro" data-scene="intro">
+      <div class="scene-inner">
+        <h2 class="headline-xl stagger-item" id="introLine1"></h2>
+        <p class="lede stagger-item" id="introLine2"></p>
+        <button class="btn stagger-item" id="btnIntroContinue">Continuar →</button>
+      </div>
+    </section>
+
+    <!-- 5. MÚSICA -->
+    <section class="scene scene-music" data-scene="music">
+      <div class="scene-inner">
+        <span class="eyebrow">Un pequeño detalle</span>
+        <h2 class="headline-lg">Aqui plasme una parte de mis mejores momentos a tu lado...</h2>
+        <div class="hairline"></div>
+        <button class="btn btn-primary" id="btnPlayMusic">Empecemos </button>
+      </div>
+    </section>
+
+    <!-- 6. GALERÍA -->
+    <section class="scene scene-gallery" data-scene="gallery">
+      <div class="scene-inner">
+        <span class="eyebrow gallery-kicker" id="galleryKicker"></span>
+        <div class="gallery-frame" id="galleryFrame"></div>
+        <div class="gallery-dots" id="galleryDots"></div>
+        <div class="gallery-skip"><button id="btnGallerySkip">Continuar →</button></div>
+      </div>
+    </section>
+
+    <!-- 7. LAS CHARCAS -->
+    <section class="scene scene-charcas" data-scene="charcas">
+      <div class="scene-inner">
+        <h2 class="headline-md stagger-item" id="charcasLine1"></h2>
+        <p class="lede stagger-item" id="charcasLine2"></p>
+        <h2 class="headline-lg stagger-item" id="charcasLine3" style="color:var(--oro); font-style:italic;"></h2>
+
+        <div class="gallery-frame" id="charcasFrame" style="margin-top:10px;"></div>
+        <div class="gallery-dots" id="charcasDots"></div>
+
+        <button class="btn" id="btnCharcasContinue" style="margin-top:34px;">Continuar →</button>
+      </div>
+    </section>
+
+    <!-- 8. TRANSICIÓN A LA CARTA -->
+    <section class="scene scene-letter-intro" data-scene="letterIntro">
+      <div class="scene-inner">
+        <p class="lede stagger-item" id="letterIntroLine1"></p>
+        <p class="lede stagger-item" id="letterIntroLine2"></p>
+        <button class="btn btn-primary stagger-item" id="btnReadLetter"></button>
+      </div>
+    </section>
+
+    <!-- 9. CARTA -->
+    <section class="scene scene-letter" data-scene="letter">
+      <div class="scene-inner">
+        <div class="letter-paper" id="letterPaper">
+          <div class="letter-heading">Para Chantal</div>
+          <div id="letterBody"></div>
+          <div class="letter-signature" id="letterSignature"></div>
+        </div>
+        <button class="btn" id="btnLetterContinue" style="margin-top:22px; opacity:0; transition:opacity 800ms;">Continuar →</button>
+      </div>
+    </section>
+
+    <!-- 10. SIGNIFICADO DE LA CANCIÓN -->
+    <section class="scene scene-song" data-scene="song">
+      <div class="scene-inner">
+        <p class="lede stagger-item" id="songLine1"></p>
+        <p class="lede stagger-item" id="songLine2"></p>
+        <div class="song-title-block stagger-item">
+          <div class="song-name" id="songName"></div>
+          <div class="song-artist" id="songArtist"></div>
+        </div>
+        <div class="song-explanation stagger-item" id="songExplanation"></div>
+        <button class="btn btn-primary stagger-item" id="btnSongContinue">Continuar →</button>
+      </div>
+    </section>
+
+    <!-- 11. FINAL -->
+    <section class="scene scene-final" data-scene="final">
+      <div class="scene-inner">
+        <p class="lede stagger-item" id="finalLine1"></p>
+        <p class="lede stagger-item" id="finalLine2"></p>
+        <div class="hairline stagger-item"></div>
+        <div class="final-names stagger-item" id="finalNames"></div>
+        <div class="final-date stagger-item" id="finalDate"></div>
+        <div class="final-closing stagger-item" id="finalClosing"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="content/memories.js"></script>
+  <script src="content/letter.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
