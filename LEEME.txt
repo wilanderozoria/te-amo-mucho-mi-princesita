@@ -1,0 +1,81 @@
+Chantal & Wilander — 5 meses
+================================
+
+CÓMO ABRIRLA
+------------
+Descomprime la carpeta y haz doble clic en "index.html".
+No necesita servidor ni instalación. Funciona en el navegador de tu
+teléfono (Android / iPhone) o en una computadora.
+
+Si algunas cosas (fotos o música) no cargan al abrirla directamente con
+doble clic por restricciones del navegador, puedes también abrirla con
+un mini servidor local (opcional, solo si notas algún problema):
+  - En la carpeta del proyecto: `python3 -m http.server 8000`
+  - Luego abre: http://localhost:8000
+
+
+1. AGREGAR TUS FOTOS
+---------------------
+Carpeta: assets/photos/
+
+- Fotos de la historia general → edítalas en: content/memories.js (arreglo GALLERY_PHOTOS)
+- Fotos del viaje a Las Charcas → edítalas en: content/memories.js (arreglo CHARCAS_PHOTOS)
+
+Solo tienes que:
+1) Poner tus imágenes dentro de assets/photos/ (ej: 01.jpg, 02.jpg...)
+2) Escribir el nombre exacto del archivo en "src" dentro de memories.js
+3) Escribir o borrar la frase de "caption" si quieres
+
+Si un archivo de foto no existe todavía, la aplicación muestra un
+pequeño marcador decorativo (un corazón) en su lugar, sin romperse.
+
+
+2. AGREGAR LA MÚSICA
+---------------------
+Carpeta: assets/audio/
+
+Coloca el archivo de audio de "Isn't She Lovely" (obtenido de una fuente
+autorizada / tu propia compra) con este nombre exacto:
+
+    assets/audio/isnt-she-lovely.mp3
+
+Si prefieres otro nombre o formato, cámbialo en:
+    js/content.js → CONFIG.song.src
+
+La música comienza cuando ella toca el botón "Reproducir ♪" en la
+escena dedicada a la canción (los navegadores no permiten reproducir
+audio automáticamente sin una interacción del usuario, así que ese
+botón cumple ambas funciones: se siente parte de la historia y activa
+el sonido).
+
+
+3. AGREGAR LA CARTA
+---------------------
+Archivo: content/letter.js
+
+Reemplaza el contenido del arreglo LETTER_PARAGRAPHS con tu carta real
+(un párrafo por cada elemento del arreglo). Cambia LETTER_SIGNATURE si
+quieres una firma distinta.
+
+
+4. CAMBIAR TEXTOS DE CUALQUIER ESCENA
+---------------------------------------
+Archivo: js/content.js
+
+Ahí están casi todos los textos de la experiencia (bienvenida, nombres,
+fecha, transición emocional, Las Charcas, explicación de la canción y
+pantalla final) organizados por escena, listos para editar sin tocar
+el resto del código.
+
+
+ESTRUCTURA DEL PROYECTO
+-------------------------
+index.html              → estructura de todas las escenas
+css/style.css            → diseño visual completo
+js/app.js                 → lógica y navegación entre escenas
+js/animations.js          → luciérnagas de fondo y efecto de luz final
+js/content.js              → textos editables de la experiencia
+content/letter.js          → la carta
+content/memories.js        → fotos y frases de la galería y Las Charcas
+assets/photos/              → tus fotografías
+assets/audio/                → la canción
