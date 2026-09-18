@@ -351,17 +351,17 @@
 
     activate(0);
 
-    const timer = setInterval(() => {
-      current++;
-      if (current >= slides.length) {
-        clearInterval(timer);
-        if (typeof options.onComplete === 'function') options.onComplete();
-        return;
-      }
-      activate(current);
-    }, interval);
-
-    activeIntervals.push(timer);
+    // Cambiamos la progresión automática por una manual (clic en la foto)
+    slides.forEach((slide) => {
+      slide.addEventListener('click', () => {
+        current++;
+        if (current >= slides.length) {
+          if (typeof options.onComplete === 'function') options.onComplete();
+        } else {
+          activate(current);
+        }
+      });
+    });
   }
 
   function enterGallery() {

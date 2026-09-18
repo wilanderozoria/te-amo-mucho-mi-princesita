@@ -316,6 +316,7 @@ p.lede {
   opacity: 0;
   transform: scale(1.08);
   transition: opacity 1400ms var(--ease), transform 6000ms linear;
+  cursor: pointer;
 }
 
 .gallery-photo.active {
@@ -624,6 +625,16 @@ p.lede {
 }
 
 /* Controles táctiles y espacio seguro para la barra inferior de Safari. */
+/* Botones de continuación - posicionamiento consistente */
+#btnDateRevealContinue,
+#btnIntroContinue,
+#btnCharcasContinue,
+#btnLetterContinue,
+#btnSongContinue {
+  margin-top: 20px;
+  transition: transform 300ms var(--ease), opacity 800ms var(--ease);
+}
+
 @media (pointer: coarse) {
   .music-control {
     top: max(12px, calc(8px + env(safe-area-inset-top)));
@@ -657,14 +668,14 @@ p.lede {
   #btnCharcasContinue,
   #btnLetterContinue,
   #btnSongContinue {
-    transform: translateY(-34px);
+    transform: translateY(-20px);
   }
 
   #btnIntroContinue:active,
   #btnCharcasContinue:active,
   #btnLetterContinue:active,
   #btnSongContinue:active {
-    transform: translateY(-34px) scale(0.97);
+    transform: translateY(-20px) scale(0.97);
   }
 
   .gallery-skip {
