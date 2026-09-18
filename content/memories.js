@@ -17,23 +17,23 @@
 const GALLERY_PHOTOS = [
   {
     src: "assets/photos/WhatsApp Image 2026-09-10 at 10.06.01 PM.jpeg",
-    caption: "Tus detalles son lo que más amo de nosotros."
+    caption: "Todo lugar es especial mientras sea contigo."
   },
   {
     src: "assets/photos/WhatsApp Image 2026-09-10 at 10.05.45 PM.jpeg",
-    caption: "Momentos que se vuelven eternos cuando estoy contigo."
+    caption: "Momentos divertidos que se vuelven eternos cuando estoy contigo."
   },
   {
     src: "assets/photos/WhatsApp Image 2026-09-10 at 10.05.57 PM.jpeg",
-    caption: "La complicidad que construimos día tras día."
+    caption: "Tu apoyo en cada uno de mis pasos."
   },
   {
     src: "assets/photos/WhatsApp Image 2026-09-10 at 10.06.04 PM (1).jpeg",
-    caption: "No importa dónde estemos, si es a tu lado es el lugar correcto."
+    caption: "Contigo todo es divertido."
   },
   {
     src: "assets/photos/WhatsApp Image 2026-09-10 at 10.05.51 PM.jpeg",
-    caption: "Tu risa es mi melodía favorita."
+    caption: "Me encanta tu cara cuando tienes verguenza jajajaja."
   },
   {
     src: "assets/photos/WhatsApp Image 2026-09-10 at 10.06.00 PM.jpeg",
