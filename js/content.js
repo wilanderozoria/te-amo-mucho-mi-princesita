@@ -16,7 +16,7 @@ const CONFIG = {
     // Coloca el archivo de audio en assets/audio/ con este nombre exacto,
     // o cambia esta ruta por la que prefieras.
     src: "assets/audio/isnt-she-lovely.mp3",
-    defaultVolume: 0.55
+    defaultVolume: 1
   },
 
   // ---------- Textos de la escena de bienvenida ----------

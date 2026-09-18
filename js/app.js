@@ -218,70 +218,12 @@
   const audio = document.getElementById('bgMusic');
   let musicStarted = false;
 
-  function fadeInAudio(target, duration = 2200) {
-    audio.volume = 0;
-    const steps = 30;
-    const stepTime = duration / steps;
-    let i = 0;
-    const fade = setInterval(() => {
-      i++;
-      audio.volume = Math.min(target, (target * i) / steps);
-      if (i >= steps) clearInterval(fade);
-    }, stepTime);
-  }
-
   function startMusic() {
     if (musicStarted) return;
     musicStarted = true;
-    const target = (window.CONFIG.song.defaultVolume) || 0.55;
-
+    audio.volume = 1;
     audio.play().catch(() => {
-      // Reproducción bloqueada por el navegador; el control manual seguirá disponible.
-    });
-    fadeInAudio(target);
-
-    document.getElementById('musicControl').classList.add('visible');
-    document.getElementById('volumeSlider').value = target;
-  }
-
-  function setupMusicControls() {
-    const btnPlayPause = document.getElementById('btnPlayPause');
-    const btnMute = document.getElementById('btnMute');
-    const volumeSlider = document.getElementById('volumeSlider');
-    const iconPlay = document.getElementById('iconPlay');
-    const iconPause = document.getElementById('iconPause');
-    const iconVolOn = document.getElementById('iconVolOn');
-    const iconVolOff = document.getElementById('iconVolOff');
-
-    btnPlayPause.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play().catch(() => {});
-        iconPlay.style.display = 'none';
-        iconPause.style.display = '';
-      } else {
-        audio.pause();
-        iconPlay.style.display = '';
-        iconPause.style.display = 'none';
-      }
-    });
-
-    btnMute.addEventListener('click', () => {
-      audio.muted = !audio.muted;
-      iconVolOn.style.display = audio.muted ? 'none' : '';
-      iconVolOff.style.display = audio.muted ? '' : 'none';
-    });
-
-    volumeSlider.addEventListener('input', () => {
-      audio.volume = parseFloat(volumeSlider.value);
-      if (audio.volume === 0) {
-        audio.muted = true;
-        iconVolOn.style.display = 'none';
-        iconVolOff.style.display = '';
-      } else if (audio.muted) {
-        audio.muted = false;
-        iconVolOn.style.display = '';
-        iconVolOff.style.display = 'none';
-      }
+      // El navegador puede bloquear la reproducción si no hubo interacción previa.
     });
   }
 
@@ -373,10 +315,6 @@
     });
   }
 
-  function setupGallery() {
-    document.getElementById('btnGallerySkip').addEventListener('click', () => showScene('charcas'));
-  }
-
   // ---------------------------------------------------------------
   // Las Charcas
   // ---------------------------------------------------------------
@@ -389,12 +327,11 @@
     const frame = document.getElementById('charcasFrame');
     const dots = document.getElementById('charcasDots');
     setTimeout(() => {
-      buildSlideshow(frame, dots, window.CHARCAS_PHOTOS, { interval: 4000 });
+      buildSlideshow(frame, dots, window.CHARCAS_PHOTOS, {
+        interval: 4000,
+        onComplete: () => showScene('letterIntro')
+      });
     }, 400);
-  }
-
-  function setupCharcas() {
-    document.getElementById('btnCharcasContinue').addEventListener('click', () => showScene('letterIntro'));
   }
 
   // ---------------------------------------------------------------
@@ -493,9 +430,6 @@
     setupDate();
     setupIntro();
     setupMusicScene();
-    setupMusicControls();
-    setupGallery();
-    setupCharcas();
     setupLetterIntro();
     setupLetter();
     setupSong();

@@ -387,26 +387,6 @@ p.lede {
   transform: scale(1.3);
 }
 
-.gallery-skip {
-  position: absolute;
-  bottom: -76px;
-  left: 0; right: 0;
-  text-align: center;
-}
-
-.gallery-skip button {
-  background: none;
-  border: none;
-  color: var(--crema-dim);
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.gallery-skip button:hover { color: var(--oro); }
-
 /* ==========================================================================
    Charcas — feels different: warmer, closer, quieter
    ========================================================================== */
@@ -621,14 +601,12 @@ p.lede {
 
 @media (max-width: 420px) {
   .scene-inner { gap: 18px; }
-  .music-control .music-note { display: none; }
 }
 
 /* Controles táctiles y espacio seguro para la barra inferior de Safari. */
 /* Botones de continuación - posicionamiento consistente */
 #btnDateRevealContinue,
 #btnIntroContinue,
-#btnCharcasContinue,
 #btnLetterContinue,
 #btnSongContinue {
   margin-top: 20px;
@@ -636,50 +614,30 @@ p.lede {
 }
 
 @media (pointer: coarse) {
-  .music-control {
-    top: max(12px, calc(8px + env(safe-area-inset-top)));
-    right: max(12px, calc(8px + env(safe-area-inset-right)));
-    gap: 8px;
-    padding: 7px 9px;
-  }
-
-  .music-control button {
-    width: 44px;
-    height: 44px;
-    background: rgba(243, 236, 225, 0.07);
-  }
-
-  .music-control button svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .music-control input[type="range"] {
-    width: 72px;
-    height: 44px;
-  }
-
   .progress {
     bottom: max(24px, calc(16px + env(safe-area-inset-bottom)));
   }
 
   /* Evita que los controles de avance queden tras el distintivo inferior. */
   #btnIntroContinue,
-  #btnCharcasContinue,
   #btnLetterContinue,
   #btnSongContinue {
     transform: translateY(-20px);
   }
 
   #btnIntroContinue:active,
-  #btnCharcasContinue:active,
   #btnLetterContinue:active,
   #btnSongContinue:active {
     transform: translateY(-20px) scale(0.97);
   }
 
-  .gallery-skip {
-    bottom: max(76px, calc(62px + env(safe-area-inset-bottom)));
+}
+
+/* En teléfonos, las fotos bajan ligeramente para aprovechar mejor el encuadre. */
+@media (max-width: 600px) {
+  .scene-gallery .scene-inner,
+  .scene-charcas .scene-inner {
+    transform: translateY(24px);
   }
 }
 
